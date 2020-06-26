@@ -15,9 +15,12 @@ namespace projekt_kalkulator
         Double results = 0;
         String operation = "";
         bool enter_value = false;
+        float iCelsius, iFahrenheit, iKelvin;
+        char iOperation;
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void standardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,7 +69,14 @@ namespace projekt_kalkulator
         {
             this.Width = 1087;
             textBox1.Width = 587;
-            
+            textBox2.Focus();
+
+            groupBox1.Visible = true;
+            groupBox2.Visible = true;
+            groupBox3.Visible = false;
+            groupBox1.Location = new Point(624, 27);
+
+
         }
 
         private void konwerterJednostekToolStripMenuItem_Click(object sender, EventArgs e)
@@ -79,6 +89,14 @@ namespace projekt_kalkulator
         {
             this.Width = 1087;
             textBox1.Width = 587;
+            txtMultiply.Focus();
+            groupBox1.Visible = false;
+            groupBox2.Visible = false;
+            groupBox3.Visible = true;
+
+            groupBox3.Location = new Point(624, 27);
+            groupBox3.Width = 435;
+            groupBox3.Height = 394;
         }
 
         private void button_Click(object sender, EventArgs e)  //wprowadzanie do "wyświetlacza" symboli z przycisków
@@ -273,12 +291,91 @@ namespace projekt_kalkulator
             textBox1.Text = System.Convert.ToString(a);
         }
 
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)// radio cel-fah
+        {
+            iOperation = 'C';
+        }
+
+        private void rbFahToCel_CheckedChanged(object sender, EventArgs e)// radio fah-cel
+        {
+            iOperation = 'F';
+        }
+
+        private void rbKelvin_CheckedChanged(object sender, EventArgs e)// radio kelvin
+        {
+            iOperation = 'K';
+        }
+
+        private void button42_Click(object sender, EventArgs e)//reset
+        {
+            textBox2.Clear();
+            lblConvert.Text = "";
+            rbCelToFah.Checked = false;
+            rbFahToCel.Checked = false;
+            rbKelvin.Checked = false;
+
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMultiply_Click(object sender, EventArgs e)
+        {
+            int a;
+            a = Convert.ToInt32(txtMultiply.Text);
+            for (int i = 1; i <13; i++)
+            {
+                lstMultiply.Items.Add(i + " x" + a + " = "+ a * i);
+            }
+        }
+
+        private void wyjścieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnResetM_Click(object sender, EventArgs e)
+        {
+            lstMultiply.Items.Clear();
+            txtMultiply.Clear();
+        }
+
         private void button39_Click(object sender, EventArgs e) // logarytm naturalny z x
         {
             double ilog = Double.Parse(textBox1.Text);
             lblShow.Text = System.Convert.ToString("log" + "(" + (textBox1.Text) + ")");// kontrolka lblShow słuzy do wyświetlania aktualnie wykonywanego działania
             ilog = Math.Log(ilog);
             textBox1.Text = System.Convert.ToString(ilog);
+        }
+
+        private void button41_Click(object sender, EventArgs e) //zachowanie przycisku konwertuj
+        {
+            switch(iOperation)
+            {
+                case 'C':
+                    //cel-fah
+                    iCelsius = float.Parse(textBox2.Text);
+                    lblConvert.Text = ((((9 * iCelsius) / 5) + 32).ToString());
+                    break;
+                case 'F': 
+                    //cel-fah
+                    iFahrenheit = float.Parse(textBox2.Text);
+                    lblConvert.Text = (((((iFahrenheit) - 32) * 5) / 9).ToString());
+                    break;
+                case 'K':
+                    //cel-fah
+                    iKelvin = float.Parse(textBox2.Text);
+                    lblConvert.Text = (((((9 * iKelvin) / 5) + 32) + 273.15).ToString());
+                    break;
+            }
         }
     }
 }

@@ -33,7 +33,6 @@
             this.standardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.naukowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temperaturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.konwerterJednostekToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnożenieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.widokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,19 +79,26 @@
             this.button40 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.rbKelvin = new System.Windows.Forms.RadioButton();
+            this.rbFahToCel = new System.Windows.Forms.RadioButton();
+            this.rbCelToFah = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button42 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblShow = new System.Windows.Forms.Label();
+            this.lblConvert = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lstMultiply = new System.Windows.Forms.ListBox();
+            this.btnMultiply = new System.Windows.Forms.Button();
+            this.btnResetM = new System.Windows.Forms.Button();
+            this.txtMultiply = new System.Windows.Forms.TextBox();
+            this.wyjścieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -103,7 +109,7 @@
             this.widokToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1071, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(313, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,8 +119,8 @@
             this.standardToolStripMenuItem,
             this.naukowyToolStripMenuItem,
             this.temperaturaToolStripMenuItem,
-            this.konwerterJednostekToolStripMenuItem,
-            this.mnożenieToolStripMenuItem});
+            this.mnożenieToolStripMenuItem,
+            this.wyjścieToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "Plik";
@@ -136,22 +142,15 @@
             // temperaturaToolStripMenuItem
             // 
             this.temperaturaToolStripMenuItem.Name = "temperaturaToolStripMenuItem";
-            this.temperaturaToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.temperaturaToolStripMenuItem.Text = "Temperatura";
+            this.temperaturaToolStripMenuItem.Size = new System.Drawing.Size(250, 22);
+            this.temperaturaToolStripMenuItem.Text = "Konwersja jednostek temperatury";
             this.temperaturaToolStripMenuItem.Click += new System.EventHandler(this.temperaturaToolStripMenuItem_Click);
-            // 
-            // konwerterJednostekToolStripMenuItem
-            // 
-            this.konwerterJednostekToolStripMenuItem.Name = "konwerterJednostekToolStripMenuItem";
-            this.konwerterJednostekToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.konwerterJednostekToolStripMenuItem.Text = "Konwerter jednostek";
-            this.konwerterJednostekToolStripMenuItem.Click += new System.EventHandler(this.konwerterJednostekToolStripMenuItem_Click);
             // 
             // mnożenieToolStripMenuItem
             // 
             this.mnożenieToolStripMenuItem.Name = "mnożenieToolStripMenuItem";
-            this.mnożenieToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.mnożenieToolStripMenuItem.Text = "Mnożenie";
+            this.mnożenieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mnożenieToolStripMenuItem.Text = "Tabliczka mnożenia";
             this.mnożenieToolStripMenuItem.Click += new System.EventHandler(this.mnożenieToolStripMenuItem_Click);
             // 
             // edytujToolStripMenuItem
@@ -620,8 +619,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblConvert);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.button42);
@@ -638,9 +637,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.groupBox2.Controls.Add(this.radioButton3);
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.rbKelvin);
+            this.groupBox2.Controls.Add(this.rbFahToCel);
+            this.groupBox2.Controls.Add(this.rbCelToFah);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBox2.Location = new System.Drawing.Point(27, 112);
             this.groupBox2.Name = "groupBox2";
@@ -649,46 +648,41 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Wybierz jednostkę do konwersji";
             // 
-            // radioButton3
+            // rbKelvin
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 110);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(84, 24);
-            this.radioButton3.TabIndex = 1;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Kelvina";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbKelvin.AutoSize = true;
+            this.rbKelvin.Location = new System.Drawing.Point(6, 110);
+            this.rbKelvin.Name = "rbKelvin";
+            this.rbKelvin.Size = new System.Drawing.Size(84, 24);
+            this.rbKelvin.TabIndex = 1;
+            this.rbKelvin.TabStop = true;
+            this.rbKelvin.Text = "Kelvina";
+            this.rbKelvin.UseVisualStyleBackColor = true;
+            this.rbKelvin.CheckedChanged += new System.EventHandler(this.rbKelvin_CheckedChanged);
             // 
-            // radioButton2
+            // rbFahToCel
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 66);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(247, 24);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Z Fahrenheita do Celciusza";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbFahToCel.AutoSize = true;
+            this.rbFahToCel.Location = new System.Drawing.Point(6, 66);
+            this.rbFahToCel.Name = "rbFahToCel";
+            this.rbFahToCel.Size = new System.Drawing.Size(247, 24);
+            this.rbFahToCel.TabIndex = 2;
+            this.rbFahToCel.TabStop = true;
+            this.rbFahToCel.Text = "Z Fahrenheita do Celsjusza";
+            this.rbFahToCel.UseVisualStyleBackColor = true;
+            this.rbFahToCel.CheckedChanged += new System.EventHandler(this.rbFahToCel_CheckedChanged);
             // 
-            // radioButton1
+            // rbCelToFah
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 25);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(244, 24);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Z celcjusza na Fahrenheita";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.textBox3.Location = new System.Drawing.Point(157, 259);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(113, 38);
-            this.textBox3.TabIndex = 5;
+            this.rbCelToFah.AutoSize = true;
+            this.rbCelToFah.Location = new System.Drawing.Point(6, 25);
+            this.rbCelToFah.Name = "rbCelToFah";
+            this.rbCelToFah.Size = new System.Drawing.Size(244, 24);
+            this.rbCelToFah.TabIndex = 3;
+            this.rbCelToFah.TabStop = true;
+            this.rbCelToFah.Text = "Z celsjusza na Fahrenheita";
+            this.rbCelToFah.UseVisualStyleBackColor = true;
+            this.rbCelToFah.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // label4
             // 
@@ -715,6 +709,7 @@
             this.button42.TabIndex = 2;
             this.button42.Text = "Reset";
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button41
             // 
@@ -724,6 +719,7 @@
             this.button41.TabIndex = 2;
             this.button41.Text = "Konwertuj";
             this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
             // label1
             // 
@@ -745,11 +741,79 @@
             this.lblShow.Size = new System.Drawing.Size(0, 13);
             this.lblShow.TabIndex = 5;
             // 
+            // lblConvert
+            // 
+            this.lblConvert.AutoSize = true;
+            this.lblConvert.Location = new System.Drawing.Point(157, 262);
+            this.lblConvert.Name = "lblConvert";
+            this.lblConvert.Size = new System.Drawing.Size(0, 31);
+            this.lblConvert.TabIndex = 7;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtMultiply);
+            this.groupBox3.Controls.Add(this.btnResetM);
+            this.groupBox3.Controls.Add(this.btnMultiply);
+            this.groupBox3.Controls.Add(this.lstMultiply);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBox3.Location = new System.Drawing.Point(1065, 27);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(435, 394);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Mnożenie";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // lstMultiply
+            // 
+            this.lstMultiply.FormattingEnabled = true;
+            this.lstMultiply.ItemHeight = 31;
+            this.lstMultiply.Location = new System.Drawing.Point(51, 55);
+            this.lstMultiply.Name = "lstMultiply";
+            this.lstMultiply.Size = new System.Drawing.Size(180, 314);
+            this.lstMultiply.TabIndex = 0;
+            this.lstMultiply.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // btnMultiply
+            // 
+            this.btnMultiply.Location = new System.Drawing.Point(237, 270);
+            this.btnMultiply.Name = "btnMultiply";
+            this.btnMultiply.Size = new System.Drawing.Size(120, 37);
+            this.btnMultiply.TabIndex = 1;
+            this.btnMultiply.Text = "Mnóż";
+            this.btnMultiply.UseVisualStyleBackColor = true;
+            this.btnMultiply.Click += new System.EventHandler(this.btnMultiply_Click);
+            // 
+            // btnResetM
+            // 
+            this.btnResetM.Location = new System.Drawing.Point(237, 222);
+            this.btnResetM.Name = "btnResetM";
+            this.btnResetM.Size = new System.Drawing.Size(120, 43);
+            this.btnResetM.TabIndex = 1;
+            this.btnResetM.Text = "Reset";
+            this.btnResetM.UseVisualStyleBackColor = true;
+            this.btnResetM.Click += new System.EventHandler(this.btnResetM_Click);
+            // 
+            // txtMultiply
+            // 
+            this.txtMultiply.Location = new System.Drawing.Point(237, 178);
+            this.txtMultiply.Name = "txtMultiply";
+            this.txtMultiply.Size = new System.Drawing.Size(120, 38);
+            this.txtMultiply.TabIndex = 2;
+            // 
+            // wyjścieToolStripMenuItem
+            // 
+            this.wyjścieToolStripMenuItem.Name = "wyjścieToolStripMenuItem";
+            this.wyjścieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wyjścieToolStripMenuItem.Text = "Wyjście";
+            this.wyjścieToolStripMenuItem.Click += new System.EventHandler(this.wyjścieToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1071, 437);
+            this.ClientSize = new System.Drawing.Size(313, 437);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button40);
@@ -803,6 +867,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -815,7 +881,6 @@
         private System.Windows.Forms.ToolStripMenuItem standardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem naukowyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem temperaturaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem konwerterJednostekToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnożenieToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem edytujToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem widokToolStripMenuItem;
@@ -855,10 +920,9 @@
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.RadioButton rbKelvin;
+        private System.Windows.Forms.RadioButton rbFahToCel;
+        private System.Windows.Forms.RadioButton rbCelToFah;
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
@@ -872,6 +936,13 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Label lblShow;
+        private System.Windows.Forms.Label lblConvert;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListBox lstMultiply;
+        private System.Windows.Forms.Button btnResetM;
+        private System.Windows.Forms.Button btnMultiply;
+        private System.Windows.Forms.TextBox txtMultiply;
+        private System.Windows.Forms.ToolStripMenuItem wyjścieToolStripMenuItem;
     }
 }
 
